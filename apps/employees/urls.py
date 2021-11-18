@@ -1,5 +1,6 @@
-from core import routers
 from django.conf.urls import include, url
+
+from apps.core import routers
 
 from . import views
 
@@ -9,5 +10,5 @@ router = routers.BaseRouter()
 router.register(r'^', views.EmployeeViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls))
+    url('', include(router.urls))
 ]

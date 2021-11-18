@@ -20,7 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # To register app from apps folder
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -30,7 +29,7 @@ SECRET_KEY = 'django-insecure-@93r-dp(xbp=)ied7m9$+1^4#af*zfvo7wvxy&&cqan##(6ef^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,10 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework_simplejwt',
 
     # Personal apps
+    'authentication',
     'posts',
     'employees',
+
 ]
 
 MIDDLEWARE = [
@@ -135,8 +137,21 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'EXCEPTION_HANDLER': 'apps.core.exceptions.exception_handler'
 }
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'apps.authentication.backends.EmailModelBackend'
+]
+
+APPEND_SLASH = False
+AUTH_USER_MODEL = 'authentication.User'

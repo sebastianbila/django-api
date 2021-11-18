@@ -12,6 +12,7 @@ packages = [
 python = "^3.10"
 Django = "^3.2.9"
 djangorestframework = "^3.12.4"
+djangorestframework-simplejwt = "^5.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

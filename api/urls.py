@@ -18,7 +18,10 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('', include("posts.urls", namespace="posts")),
+    path('posts', include("posts.urls", namespace="posts")),
     path('employee', include("employees.urls", namespace="employees")),
+    path('auth', include("authentication.urls", namespace="authentication")),
 ]
+
+handler404 = 'apps.core.exceptions.not_found_error_handler'
+handler500 = 'apps.core.exceptions.internal_server_error_handler'
